@@ -1,0 +1,3 @@
+# word2vec for Nim
+
+In progress...
