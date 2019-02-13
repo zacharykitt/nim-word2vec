@@ -26,7 +26,7 @@ proc getContext*[T](tokens: seq[T], pos: int, window: int): seq[T] =
     a given position. Words can be represented as strings or vectors.
     ]#
     let floor: int = max(pos-window, 0)
-    let ceil: int = min(pos+window, len(tokens))
+    let ceil: int = min(pos+window, tokens.len-1)
     var left: seq[string] = tokens[floor..pos-1]
     var right: seq[string] = tokens[pos+1..ceil]
     result = concat(left, right)
