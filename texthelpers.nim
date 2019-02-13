@@ -1,8 +1,8 @@
 #[ This module provides basic tools for preparing text for NLP.
  ]#
-import future
 import sequtils
 import strutils
+import sugar
 
 proc isNotPunctuation(c: char): bool =
     #[ Return true if the character is not punctuation.
@@ -18,12 +18,14 @@ proc isNotPunctuation(c: char): bool =
 proc removePunctuation*(str: string): string =
     # Remove all punctuation from a string.
     var filteredChars: seq[char] = filter(str.mapIt(char, it), isNotPunctuation)
-    result = join(filteredChars)
+    result = filteredChars.join
 
-proc normalizeAndTokenize*(str: string): seq[string] =
+proc normalizeAndTokenize*(str: string, lower: bool = true): seq[string] =
     # Convert a string into a sequence of normalized tokens.
-    var str: string = toLower(str)
-    str = removePunctuation(str)
+    var str: string = str
+    if lower: 
+        str = str.toLower
+    str = str.removePunctuation
     for word in tokenize(str):
         if word.isSep == false:
             result.add(word.token) 
