@@ -26,6 +26,6 @@ proc normalizeAndTokenize*(str: string, lower: bool = true): seq[string] =
     if lower: 
         str = str.toLower
     str = str.removePunctuation
-    for word in tokenize(str):
+    for word in str.tokenize:
         if word.isSep == false:
             result.add(word.token) 
